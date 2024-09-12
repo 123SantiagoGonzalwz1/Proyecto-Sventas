@@ -1,6 +1,7 @@
 package com.sventas.sventas.service;
 
 import com.sventas.sventas.model.Customers;
+import com.sventas.sventas.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 public class CustomerService implements ICustomerService {
 
     @Autowired
-    private ICustomerService customerRepo;
+    private CustomerRepository customerRepo;
 
     @Override
     public Customers create(Customers customers) {
@@ -25,7 +26,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customers findById(Integer id) {
-        Optional<Customers> customersOptional = Optional.ofNullable(customerRepo.findById(id));
+        Optional<Customers> customersOptional = customerRepo.findById(id);
         return customersOptional.orElse(null);
     }
 
